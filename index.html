@@ -2,6 +2,23 @@
   <title>爱笑的苦力怕官网</title>
 </head>
 <body>
+<script>  
+  function switchPage() {  
+    // 隐藏当前页面  
+    document.getElementById("currentPage").style.display = "none";  
+      
+    // 显示目标页面  
+    var targetPage = document.getElementById("targetPage");  
+    targetPage.style.display = "block";  
+  }  
+</script>  
 <h1>欢迎来到爱笑的苦力怕.py-Github官网！</h1>
 <a href=”https://space.bilibili.com/3493082144181043?spm_id_from=333.1007.0.0”>跳转至Bilibili主页</a>
+<div>
+  <button>登录</button>
+  <button>注册</button>
+</div>
+<div>
+  <button onclick="switchPage()">MinecraftOS-软件上传</button>
+</div>
 </body>

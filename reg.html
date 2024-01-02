@@ -36,18 +36,33 @@
     margin-top: 30
   }
 </style>
+<script>  
+  function saveFile() {  
+    var fileName = document.getElementById("fileName").value;  
+    var fileContent = document.getElementById("fileContent").value;  
+        
+    // 创建一个隐藏的表单元素来保存文件内容  
+    var formData = new FormData();  
+    formData.append("file", new Blob([fileContent], {type: "text/plain;charset=utf-8"}), fileName);  
+       
+    // 发送POST请求到服务器保存文件  
+    var xhr = new XMLHttpRequest();  
+    xhr.open("POST", "save_file.php", true);  
+    xhr.send(formData);  
+  }  
+</script>  
 <div class="center-container">
 <form>
   <div id="un">
     <label for="name">用户名</label>
     <div id="uni">
-      <input type="text" id="name" name="name">
+      <input type="text" id="fileName" name="name">
     </div>
   </div>
   <div id="psw">
     <label for="password">密码</label>
     <div id="pswi">
-      <input type="text" id="password" name="password">
+      <input type="text" id="fileContent" rows="4" cols="50" name="password">
     </div>
   </div>
   <div id="2psw">
@@ -57,7 +72,7 @@
     </div>
   </div>
     <br>
-    <input type="submit" value="提交">
+    <button onclick="saveFile()" type="submit" value="提交">
 </form>
 </div>
 </body>

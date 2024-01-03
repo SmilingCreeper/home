@@ -1,53 +1,43 @@
-#loginDiv {  
-    position: fixed;  
-    top: 0;  
-    right: 0;  
+button {
+  background-color: #BBBBBB;
+  border: 2px solid #DDDDDD;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
-body {  
-  font-family: Arial, sans-serif;  
-  background-color: #f0f0f0;  
-  margin: 0;  
-  padding: 0;  
-}  
 
-header {  
-  background-color: #333;  
-  color: #fff;  
-  padding: 20px;  
-  text-align: center;  
-}  
+button:hover {
+  background-color: #BBBBBB;
+}
 
-main {  
-  margin: 20px;  
-  padding: 20px;  
-  background-color: #fff;  
-  border: 1px solid #ccc;  
-}  
+select {
+  background-color: #BBBBBB;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none; /* 去除默认样式 */
+  -moz-appearance: none;
+  appearance: none;
+}
 
-h1 {  
-  color: #333;  
-  text-align: center;  
-}  
+.kook {
+  float: left;
+  width: 75%;
+}
 
-p {  
-  color: #666;  
-  line-height: 1.5;  
-}  
+.login {
+  float: right;
+  width: 25%;
+}
 
-input-box {  
-  width: 200px;  
-  padding: 10px;  
-  border: 1px solid #ccc;  
-  border-radius: 4px;  
-  background-color: #fff;  
-  color: #333;  
-}  
-button {  
-  display: inline-block;  
-  padding: 10px 20px;  
-  background-color: #007BFF;  
-  color: #fff;  
-  text-align: center;  
-  border-radius: 4px;  
-  cursor: pointer;  
-}  
+.slc {
+  float: none;
+}

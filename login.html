@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>注册</title>
+</head>
+<body>
+<style>
+  .center-div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* 或使用具体的像素值，例如 width: 300px; */
+  }
+  .un {
+    margin-left: 10
+    margin-top: 10
+  }
+  .uni {
+    margin-left: 20
+    margin-top: 10
+  }
+  .psw {
+    margin-left: 10
+    margin-top: 20
+  }
+  .pswi {
+    margin-left: 20
+    margin-top: 20
+  }
+  .2psw {
+    margin-left: 10
+    margin-top: 30
+  }
+  .2psw {
+    margin-left: 20
+    margin-top: 30
+  }
+</style>
+<script>  
+  function saveFile() {  
+    var fileName = document.getElementById("fileName").value;  
+    var fileContent = document.getElementById("fileContent").value;  
+        
+    // 创建一个隐藏的表单元素来保存文件内容  
+    var formData = new FormData();  
+    formData.append("file", new Blob([fileContent], {type: "text/plain;charset=utf-8"}), fileName);  
+       
+    // 发送POST请求到服务器保存文件  
+    var xhr = new XMLHttpRequest();  
+    xhr.open("POST", "save_file.php", true);  
+    xhr.send(formData);  
+  }  
+</script>  
+<div class="center-container">
+<form>
+  <div id="un">
+    <label for="name">用户名</label>
+    <div id="uni">
+      <input type="text" id="fileName" name="name">
+    </div>
+  </div>
+  <div id="psw">
+    <label for="password">密码</label>
+    <div id="pswi">
+      <input type="text" id="fileContent" rows="4" cols="50" name="password">
+    </div>
+  </div>
+    <br>
+    <button onclick="saveFile()" type="submit" value="登录">登录</button>
+</form>
+</div>
+</body>
+</html>

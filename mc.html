@@ -2,6 +2,21 @@
   <title>Minecraft</title>
 </head>
 <body>
+  <script>
+    function goToPage() {
+      // 获取下拉菜单当前选中的值
+      var c = document.getElementById("launchers").value;
+
+      // 跳转到新的页面
+      if(c === "pcl2") {
+        window.location.href = "mcos.html"
+      }
+
+      if(c === "chatterbot") {
+        window.location.href = "chatterrbot.html"
+      }
+    }
+  </script>
   <p>Minecraft启动器下载</p>
   <select id="launchers">
     <option value="pcl2">PCL2（UP在用）</option>

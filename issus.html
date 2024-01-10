@@ -1,0 +1,53 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>Bug反馈</title>  
+  <style>  
+    .bug-list {  
+      margin-top: 20px;  
+    }  
+    .bug-item {  
+      margin-bottom: 10px;  
+    }  
+  </style>  
+</head>  
+<body>  
+  <h1>Bug反馈</h1>  
+  <form id="bug-form">  
+    <label for="bug-desc">Bug描述:</label>  
+    <textarea id="bug-desc" required></textarea>  
+    <br>  
+    <label for="trigger-steps">触发步骤:</label>  
+    <textarea id="trigger-steps"></textarea>  
+    <button type="submit">提交</button>  
+  </form>  
+  <div id="bug-list" class="bug-list"></div>  
+  
+  <script>  
+    let bugList = document.getElementById('bug-list');  
+    let bugForm = document.getElementById('bug-form');  
+    let bugDescInput = document.getElementById('bug-desc');  
+    let triggerStepsInput = document.getElementById('trigger-steps');  
+    let bugCounter = 1;  
+  
+    function renderBug(bug, triggerSteps) {  
+      let bugItem = document.createElement('div');  
+      bugItem.className = 'bug-item';  
+      bugItem.textContent = `Bug #${bugCounter}: ${bug}\n触发步骤: ${triggerSteps}`;  
+      bugList.appendChild(bugItem);  
+      bugCounter++;  
+    }  
+  
+    bugForm.addEventListener('submit', function(e) {  
+      e.preventDefault();  
+      let bugDesc = bugDescInput.value;  
+      let triggerSteps = triggerStepsInput.value;  
+      if (bugDesc && triggerSteps) {  
+        renderBug(bugDesc, triggerSteps);  
+        bugDescInput.value = '';  
+        triggerStepsInput.value = '';  
+      }  
+    });  
+  </script>  
+</body>  
+</html>

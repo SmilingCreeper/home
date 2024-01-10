@@ -1,66 +1,22 @@
 <!DOCTYPE html>  
-<html>  
+<html lang="en">  
 <head>  
-  <title>Bug反馈</title>  
-  <style>  
-    .bug-list {  
-      margin-top: 20px;  
-    }  
-    .bug-item {  
-      margin-bottom: 10px;  
-    }  
-  </style>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Bug反馈</title>  
 </head>  
 <body>  
-  <h1>Bug反馈</h1>  
-  <form id="bug-form">  
-    <label for="bug-desc">Bug描述:</label>  
-    <textarea id="bug-desc" required></textarea>  
-    <br>  
-    <label for="trigger-steps">触发步骤:</label>  
-    <textarea id="trigger-steps"></textarea>  
-    <button type="submit">提交</button>  
-  </form>  
-  <div id="bug-list" class="bug-list"></div>  
-  <div id="bug-confirmation"></div>  
-  
-  <script>  
-    let bugList = document.getElementById('bug-list');  
-    let bugForm = document.getElementById('bug-form');  
-    let bugDescInput = document.getElementById('bug-desc');  
-    let triggerStepsInput = document.getElementById('trigger-steps');  
-    let bugCounter = 1;  
-    let bugConfirmation = document.getElementById('bug-confirmation');  
-  
-    function renderBug(bug, triggerSteps) {  
-      let bugItem = document.createElement('div');  
-      bugItem.className = 'bug-item';  
-      bugItem.textContent = `Bug #${bugCounter}: ${bug}\n触发步骤: ${triggerSteps}`;  
-      bugList.appendChild(bugItem);  
-      bugCounter++;  
-    }  
-  
-    function showBugConfirmation() {  
-      let confirmationText = `Bug #${bugCounter} 已提交!`;  
-      bugConfirmation.textContent = confirmationText;  
-      setTimeout(() => {  
-        bugConfirmation.textContent = '';  
-      }, 2000); // 2秒后清除确认信息  
-    }  
-  
-    bugForm.addEventListener('submit', function(e) {  
-      e.preventDefault();  
-      let bugDesc = bugDescInput.value;  
-      let triggerSteps = triggerStepsInput.value;  
-      if (bugDesc && triggerSteps) {  
-        renderBug(bugDesc, triggerSteps);  
-        showBugConfirmation(); // 显示提交确认信息  
-        bugDescInput.value = '';  
-        triggerStepsInput.value = '';  
-      } else {  
-        alert('请填写Bug描述和触发步骤！'); // 如果未填写描述或触发步骤，显示警告信息  
-      }  
-    });  
-  </script>  
+    <h2>Bug反馈</h2>  
+    <form id="bugForm" method="post" action="javascript:void(0);">  
+        <label for="bugNumber">Bug编号:</label>  
+        <input type="text" id="bugNumber" readonly><br><br>  
+        <label for="bugDescription">Bug描述:</label><br>  
+        <textarea id="bugDescription" rows="4" cols="50"></textarea><br><br>  
+        <label for="triggerSteps">触发步骤:</label><br>  
+        <textarea id="triggerSteps" rows="4" cols="50"></textarea><br><br>  
+        <input type="submit" value="提交">  
+    </form>  
+    <div id="bugList"></div>  
+    <script src="script.js"></script>  
 </body>  
 </html>

@@ -22,6 +22,7 @@
     <button type="submit">提交</button>  
   </form>  
   <div id="bug-list" class="bug-list"></div>  
+  <div id="bug-confirmation"></div>  
   
   <script>  
     let bugList = document.getElementById('bug-list');  
@@ -29,6 +30,7 @@
     let bugDescInput = document.getElementById('bug-desc');  
     let triggerStepsInput = document.getElementById('trigger-steps');  
     let bugCounter = 1;  
+    let bugConfirmation = document.getElementById('bug-confirmation');  
   
     function renderBug(bug, triggerSteps) {  
       let bugItem = document.createElement('div');  
@@ -38,14 +40,25 @@
       bugCounter++;  
     }  
   
+    function showBugConfirmation() {  
+      let confirmationText = `Bug #${bugCounter} 已提交!`;  
+      bugConfirmation.textContent = confirmationText;  
+      setTimeout(() => {  
+        bugConfirmation.textContent = '';  
+      }, 2000); // 2秒后清除确认信息  
+    }  
+  
     bugForm.addEventListener('submit', function(e) {  
       e.preventDefault();  
       let bugDesc = bugDescInput.value;  
       let triggerSteps = triggerStepsInput.value;  
       if (bugDesc && triggerSteps) {  
         renderBug(bugDesc, triggerSteps);  
+        showBugConfirmation(); // 显示提交确认信息  
         bugDescInput.value = '';  
         triggerStepsInput.value = '';  
+      } else {  
+        alert('请填写Bug描述和触发步骤！'); // 如果未填写描述或触发步骤，显示警告信息  
       }  
     });  
   </script>  

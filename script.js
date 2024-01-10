@@ -17,8 +17,7 @@ document.getElementById('bugForm').addEventListener('submit', function(e) {
         xhr.send('bugNumber=' + bugNumber + '&bugDescription=' + encodeURIComponent(bugDescription) + '&triggerSteps=' + encodeURIComponent(triggerSteps)); // 发送数据到服务器  
           
         // 更新bug编号  
-        bugNumber++; // 自增1，为下一个bug编号做准备  
-        document.getElementById('bugNumber').value = bugNumber; // 更新输入框中的bug编号  
+        bugNumber++; // 自增1，为下一个bug编号做准备   
     } else {  
         alert('请填写所有字段！'); // 如果用户没有填写所有字段，显示警告信息  
     }  

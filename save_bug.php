@@ -1,5 +1,5 @@
 <?php   
-$bugNumber = $_POST['bugNumber'];   
+$bugNumber = $_POST['bugNumber']; // 获取自动分配的bug编号
 $bugDescription = $_POST['bugDescription'];   
 $triggerSteps = $_POST['triggerSteps'];   
 // 在这里添加代码来处理文件写入逻辑。例如：将bugNumber写入bugnumber.txt，将bug描述和触发步骤写入bugs.txt。你可能需要根据你的具体需求调整这部分代码。   

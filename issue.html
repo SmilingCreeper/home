@@ -7,20 +7,20 @@
     <title>Bug反馈</title>  
 </head>  
 <body>  
-    <div id="loginDiv">
-      <button>登录</button>
-      <button onclick="window.location.href='reg.html'">注册</button>
-    </div>
-    <h2>Bug反馈</h2>  
-    <form id="bugForm" method="post" action="javascript:void(0);">  
-        <label for="bugNumber">Bug编号:</label>   
-        <label for="bugDescription">Bug描述:</label><br>  
-        <textarea id="bugDescription" rows="4" cols="50"></textarea><br><br>  
-        <label for="triggerSteps">触发步骤:</label><br>  
-        <textarea id="triggerSteps" rows="4" cols="50"></textarea><br><br>  
-        <input type="submit" value="提交">  
-    </form>  
-    <div id="bugList"></div>  
-    <script src="script.js"></script>  
+  <div id="loginDiv">
+    <button onclick="window.location.href='login.html'">登录</button>
+    <button onclick="window.location.href='reg.html'">注册</button>
+  </div>
+  <h2>Bug反馈</h2>  
+  <form id="bugForm" method="post" action="javascript:void(0);">  
+    <label for="bugNumber">Bug编号:</label>   
+    <label for="bugDescription">Bug描述:</label><br>  
+    <textarea id="bugDescription" rows="4" cols="50"></textarea><br><br>  
+    <label for="triggerSteps">触发步骤:</label><br>  
+    <textarea id="triggerSteps" rows="4" cols="50"></textarea><br><br>  
+    <input type="submit" value="提交">  
+  </form>  
+  <div id="bugList"></div>  
+  <script src="script.js"></script>  
 </body>  
 </html>

@@ -9,6 +9,34 @@
       top:20
     }
   </style>
+  <script>
+    function download() {
+      // 获取下拉菜单当前选中的值
+      var c = document.getElementById("slct").value;
+
+      // 跳转到新的页面
+      if(c === "v3_0") {
+        window.location.href="https://pan.baidu.com/s/1FbySZSffQbDgVtinkBu0KQ"
+      }
+
+      if(c === "v3_1") {
+        window.location.href="https://pan.baidu.com/s/17cGs10ldadMfunXr1zpfnA"
+      }
+
+      if(c === "v3_2") {
+        window.location.href="https://pan.baidu.com/s/1s0WPyAOn1GvAIL-bj-12pA"
+      }
+      if(c === "v4_0") {
+        window.location.href="https://pan.baidu.com/s/1pOP61vjM7-d5jSQPR3hJYw"
+      }
+      if(c === "v5_0") {
+        window.location.href="https://pan.baidu.com/s/1w5zWWxNDP1szvKFz93g4mg"
+      }
+      if(c === "v6_0") {
+        window.location.href="https://pan.baidu.com/s/1O1MPrrncoL8ilAf2qyeJUA?pwd=1145"
+      }
+    }
+  </script>
   <div id="loginDiv">
     <button onclick="window.location.href='login.html'">登录</button>
     <button onclick="window.location.href='reg.html'">注册</button>
@@ -21,5 +49,5 @@
     <option value="v3_0">MinecraftOS 3.0</option>
   </select>
   <button>下载</button>
-  <p id="3d">3.0以下版本需要B站私信up主获得</p>
+  <p id="3d">下载提取码均为1145，3.0以下版本需要B站私信up主获得</p>
 </body>

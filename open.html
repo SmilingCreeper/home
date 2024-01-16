@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<head>
+  <title>源代码</title>
+</head>
+<body>
+  <h1>源代码</h1>
+  <h2>Vista</h2>
+  <div>
+    <code>
+      import pygame
+import time
+import subprocess
+import qrcode
+import random
+import os
+import webbrowser
+from pygame.locals import *
+import glob
+import importlib
+import inspect
+import applications
+mode="Normal"
+now=time.strftime("%Y")+"-"+time.strftime("%m")+"-"+time.strftime("%d")+" "+time.strftime("%T")
+log=open(r"disks\C.%\MinecraftOS\log.txt","a")
+log.write(f"{now} [initalization] import 12 libs\n")
+log.flush()
+
+unk_window=False
+#23w52a
+##module_paths = glob.glob(r"applications\*.py")
+module_paths = "applications\\"
+vmm=pygame.image.load("vmmojang.png")
+vmm=pygame.transform.scale(vmm,(1300,750))
+unk_app=pygame.image.load(r"windows\unknown_app.png")
+unk_fun=pygame.image.load(r"windows\unknown_fun.png")
+explorer=None
+pygame.init()
+
+
+
+timefont=pygame.font.Font("Unifont.ttf",24)
+fontS=pygame.font.Font("Unifont.ttf",24)
+
+a=0
+FILE_OPENER_POS = (50, 20)
+FILE_OPENER_SIZE = (100, 40)
+file_opener_button = pygame.Rect(FILE_OPENER_POS[0], FILE_OPENER_POS[1], FILE_OPENER_SIZE[0], FILE_OPENER_SIZE[1])
+FONT_NAME="Unifont"
+FONT_SIZE=24
+# 获取当前目录
+start_index = 0
+SCROLL_AMOUNT = 8
+current_path = os.getcwd()+r"\disks"
+sound=64
+running=False
+clock=pygame.time.Clock()
+screen=pygame.display.set_mode((1300,750))
+pygame.display.set_caption("MinecraftOS v6.0")
+screen.fill((50,50,50))
+pygame.display.init()
+pygame.font.init()
+pygame.mixer.init()
+xpfont=pygame.font.Font(r"Unifont.ttf",100)
+font=pygame.font.Font(r"Unifont.ttf",50)
+startingtitle=font.render("MinecraftOS\nStarting...",True,(255,255,255))
+shutdowntitle=font.render("MinecraftOS\nShutting Down...",True,(255,255,255))
+messageboximg=pygame.image.load(r"start\messagebox.png").convert()
+screen.blit(startingtitle,(375,475))
+folder_icon = pygame.image.load("folder.png")
+
+folder_icon = pygame.transform.scale(folder_icon,(25,25))
+file_icon = pygame.image.load("file.png")
+file_icon = pygame.transform.scale(file_icon,(25,25))
+ICON_SIZE = (25, 25)
+pygame.mouse.set_visible(False)
+logostart=pygame.image.load("logo-start.png")
+nFont=pygame.font.Font(r"Unifont.ttf",200)
+soundpng=pygame.image.load(r"start\sound.png")
+soundpng=pygame.transform.scale(soundpng,(48,48))
+t = open("times.mcosdll", "r", encoding="utf-8")
+t1 = open("times.mcosdll", "w", encoding="utf-8")
+
+font_size = 36
+font=pygame.font.Font(r"Unifont.ttf",50)
+
+# 设置输入框的位置和大小
+input_box_width = 1300
+input_box_height = font_size + 10
+input_box_x = 10
+input_box_y = 690
+input_box = pygame.Rect(input_box_x, input_box_y, input_box_width, input_box_height)
+right_click_img=pygame.image.load("desktop_right_click.png")
+# 初始化输入字符串
+input_str = "/"
+
+t_read = t.read().strip()
+if t_read != "":
+    t_num = int(t_read)
+    if t_num % 66 == 0:
+        os.startfile(r"disks\C.%\MinecraftOS\update.osexe\update.pyw")
+        time.sleep(90)
+    t1.write(str(t_num + 1))
+else:
+    t1.write("1")
+
+t1.close()
+
+def blueSc(Error_Code):
+    log.write(f"{now} [error] blue_screen, code: "+Error_Code+"\n")
+    log.flush()
+    screen.fill((50, 50, 150))
+    bst1=nFont.render(":(",True,(255,255,255))
+    bst2=font.render("你的电脑遇到问题，需要重启。",True,(255,255,255))
+    bst3=font.render("我们只收集部分错误信息。",True,(255,255,255))
+    bst4=font.render("错误代码："+Error_Code,True,(255,255,255))
+    screen.blit(bst1,(100,100))
+    screen.blit(bst2,(100,350))
+    screen.blit(bst3,(100,400))
+    screen.blit(bst4,(100,450))
+    pygame.display.update()
+    time.sleep(9)
+
+#隐藏的内容，没有实装，这里我很早的时候就有了，但是忘记pygame.display.update()了
+def OSmessagebox(title="提示",letter="这是一个提示框"):
+    screen.blit(messageboximg,(400,200))
+
+xp=xpfont.render("xp",True,(255,255,255))
+def ra1():
+    log.write(f"{now} [initalize] startup \n")
+    log.flush()
+    for i in range(3):
+        #1
+        pygame.draw.line(screen,(255,255,255),(645,365),(660,365),15)
+        pygame.draw.line(screen,(255,255,255),(670,375),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #2
+        pygame.draw.line(screen,(255,255,255),(670,375),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(630,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #3
+        pygame.draw.line(screen,(255,255,255),(670,390),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #4
+        pygame.draw.line(screen,(255,255,255),(670,410),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(615,420),(600,420),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #5
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(610,395),(610,430),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #6
+        pygame.draw.line(screen,(255,255,255),(615,435),(645,435),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #7
+        pygame.draw.line(screen,(255,255,255),(625,430),(625,445),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,360),(625,375),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #8
+        pygame.draw.line(screen,(255,255,255),(625,430),(625,445),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(640,365),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #9
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(655,365),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #10
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,415),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #11
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,400),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(670,380),(685,380),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #12
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(680,380),(680,410),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #13
+        pygame.draw.line(screen,(255,255,255),(640,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(680,380),(680,425),15)
+        screen.blit(logostart,(100,100))
+        screen.blit(xp,(1100,50))#原来的：(175,100)
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #防卡
+        event=pygame.event.poll()
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            exit()
+def ra2():
+    log.write(f"{now} [shutdown] shutdown\n")
+    log.flush()
+    for i in range(3):
+        #1
+        pygame.draw.line(screen,(255,255,255),(645,365),(660,365),15)
+        pygame.draw.line(screen,(255,255,255),(670,375),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(175,100))
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #2
+        pygame.draw.line(screen,(255,255,255),(670,375),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(630,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #3
+        pygame.draw.line(screen,(255,255,255),(670,390),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(645,435),(660,435),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #4
+        pygame.draw.line(screen,(255,255,255),(670,410),(670,425),15)
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(615,420),(600,420),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #5
+        pygame.draw.line(screen,(255,255,255),(615,435),(660,435),15)
+        pygame.draw.line(screen,(255,255,255),(610,395),(610,430),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #6
+        pygame.draw.line(screen,(255,255,255),(615,435),(645,435),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #7
+        pygame.draw.line(screen,(255,255,255),(625,430),(625,445),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,360),(625,375),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #8
+        pygame.draw.line(screen,(255,255,255),(625,430),(625,445),15)
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(640,365),15)
+        screen.blit(logostart, (175, 100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #9
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,430),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(655,365),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #10
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,415),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #11
+        pygame.draw.line(screen,(255,255,255),(610,380),(610,400),15)
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(670,380),(685,380),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #12
+        pygame.draw.line(screen,(255,255,255),(625,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(680,380),(680,410),15)
+        screen.blit(logostart,(175,100))
+
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #13
+        pygame.draw.line(screen,(255,255,255),(640,365),(670,365),15)
+        pygame.draw.line(screen,(255,255,255),(680,380),(680,425),15)
+        screen.blit(logostart,(175,100))
+        pygame.display.update()
+        time.sleep(0.125)
+        screen.fill((30,30,31))
+        #防卡
+        event=pygame.event.poll()
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            exit()
+screen.fill((0,0,0))
+
+def sra():
+    
+    for i in range(37,101):
+        screen.fill((0,0,0))
+        pygame.draw.rect(screen,(255,255,255),(200,550,900,31),5)
+        pygame.draw.line(screen,(255,255,255),(208,565),(500,565),15)
+        progress=font.render(str(i)+"%",True,(255,255,255))
+        screen.blit(progress,(635,600))
+        pygame.display.update()
+time.sleep(2)
+screen.blit(vmm,(0,0))
+pygame.display.update()
+time.sleep(2)
+screen.fill((50,50,50))
+
+ra1()
+pygame.display.update()
+screen.fill((50,50,200))
+#没有剩余的命名想法才这样的啊啊啊
+userbbb=pygame.image.load(r"disks\C.%\Users\Steve\user.png")
+huanying=font.render("欢迎使用",True,(255,255,255))
+screen.blit(huanying,(600,325))
+screen.blit(userbbb,(400,300))
+pygame.display.update()
+time.sleep(2)
+renwulan=pygame.image.load(r"start\任务栏.png")
+background=pygame.image.load(r"sounds\background.jpg")
+background=pygame.transform.scale(background,(1300,750))
+startbutton=pygame.image.load(r"start\button.PNG").convert()
+startmenu=pygame.image.load(r"start\menu.png").convert()
+setos=pygame.image.load(r"start\set.png").convert()
+pclimg=pygame.image.load(r"start\pcl.png")
+jiaocheng=pygame.image.load(r"disks\C.%\Users\Steve\Desktop\教程.lnk\icon.png")
+apps=pygame.image.load(r"start\apps.png")
+virus=pygame.image.load(r"disks\C.%\Users\Steve\Desktop\病毒.lnk\icon.png")
+chest=pygame.image.load(r"disks\C.%\MinecraftOS\箱子.osexe\icon.png")
+chest=pygame.transform.scale(chest,(100,100))
+logo=pygame.image.load(r"logo.PNG")
+desktopicon = pygame.image.load(r"start\desktop.png")
+
+def blitprogressbar():
+    renwulan=pygame.image.load(r"start\任务栏.png")
+    music=pygame.image.load(r"start\music.png")
+    music=pygame.transform.scale(music,(50,50))
+    startbutton=pygame.image.load(r"start\button.PNG").convert()
+    startmenu=pygame.image.load(r"start\menu.png").convert()
+    setos=pygame.image.load(r"start\set.png").convert()
+    pclimg=pygame.image.load(r"start\pcl.png")
+    apps=pygame.image.load(r"start\apps.png")
+    logo=pygame.image.load(r"logo.PNG")
+    paint=pygame.image.load(r"start\paint.PNG")
+    paint=pygame.transform.scale(paint,(50,50))
+
+    screen.blit(renwulan,(0,660))
+    screen.blit(setos,(100,675))
+    screen.blit(startbutton,(25,675))
+    screen.blit(pclimg,(165,675))
+    screen.blit(apps,(230,675))
+    screen.blit(logo,(900,525))
+    screen.blit(soundpng,(295,675))
+    screen.blit(music,(360,675))
+    screen.blit(paint,(425,675))
+    pygame.display.update()
+
+def initalize():
+    renwulan=pygame.image.load(r"start\任务栏.png")
+    music=pygame.image.load(r"start\music.png")
+    music=pygame.transform.scale(music,(50,50))
+    background=pygame.image.load(r"sounds\background.jpg")
+    background=pygame.transform.scale(background,(1300,750))
+    startbutton=pygame.image.load(r"start\button.PNG").convert()
+    startmenu=pygame.image.load(r"start\menu.png").convert()
+    setos=pygame.image.load(r"start\set.png").convert()
+    pclimg=pygame.image.load(r"start\pcl.png")
+    jiaocheng=pygame.image.load(r"disks\C.%\Users\Steve\Desktop\教程.lnk\icon.png")
+    apps=pygame.image.load(r"start\apps.png")
+    virus=pygame.image.load(r"disks\C.%\Users\Steve\Desktop\病毒.lnk\icon.png")
+    chest=pygame.image.load(r"disks\C.%\MinecraftOS\箱子.osexe\icon.png")
+    chest=pygame.transform.scale(chest,(100,100))
+    logo=pygame.image.load(r"logo.PNG")
+    paint=pygame.image.load(r"start\paint.PNG")
+    paint=pygame.transform.scale(paint,(50,50))
+    screen.blit(paint,(425,675))
+
+    screen.blit(background,(0,0))
+    screen.blit(renwulan,(0,660))
+    screen.blit(setos,(100,675))
+    screen.blit(startbutton,(25,675))
+    screen.blit(pclimg,(165,675))
+    screen.blit(apps,(230,675))
+    screen.blit(jiaocheng,(50,50))
+    screen.blit(virus,(50,200))
+    screen.blit(logo,(900,525))
+    screen.blit(soundpng,(295,675))
+    screen.blit(chest,(50,350))
+    screen.blit(music,(360,675))
+    timehm=timefont.render(time.strftime("%H")+':'+time.strftime("%M"),True,(255,255,255))
+    timemyd=timefont.render(time.strftime("%F"),True,(255,255,255))
+    blitprogressbar()
+    screen.blit(timehm,(510,674))
+    screen.blit(timemyd,(510,698))
+    pygame.display.update()
+initalize()
+log.write(f"{now} [initalize] desktop\n")
+log.flush()
+
+
+# 初始化混音器模块（pygame库的通用做法，每一个模块在使用时都要初始化pygame.init()为初始化所有的pygame模块，可以使用它也可以单初始化这一个模块）
+pygame.mixer.music.load(r"sounds\starting.mp3")  # 加载音乐
+pygame.mixer.music.set_volume(0.125)# 设置音量大小0~1的浮点数
+pygame.mixer.music.play() # 播放音频
+background=pygame.image.load(r"sounds\background.jpg").convert()
+startbutton=pygame.image.load(r"start\button.PNG").convert()
+startmenu=pygame.image.load(r"start\menu.png").convert()
+dosth=pygame.image.load(r"start\dosth.png").convert()
+wrongp=pygame.image.load(r"disks\C.%\Users\Steve\Desktop\教程.lnk\s\msgbox.png")
+startmenuis=0
+initalize()
+pygame.mouse.set_visible(True)
+
+clock.tick(300)
+
+def check():
+    if input_str == "/start minecraftos:cmd":
+        log.write(f"{now} [command] cmd\n")
+        os.startfile(r"disks\C.%\MinecraftOS\cmd.py")
+    if input_str.startswith("/start apps:"):
+        app_name = input_str.split(":")[1]
+        log.write(f"{now} [command] open app: "+app_name+"\n")
+        # 导入指定的应用程序模块并调用其main函数（如果存在）
+##        module = getattr(applications, app_name, None)
+##        if module is not None:
+##            if hasattr(module, "main") and callable(getattr(module, "main")):
+##                module.main()
+        with open("applications\\"+app_name+".py") as f:
+            code=f.read()
+            running=False
+            initalize()
+            exec(code)
+    if input_str.startswith("/openfile ") and input_str.endswith(".pic"):
+        log.write(f"{now} [command] open file: "+input_str[10:]+"\n")
+        with open("disks\\"+input_str[10:-4], "r") as picture:
+            code = picture.read()
+            exec("pic=" + code)
+            for i in pic:
+                for j in i:
+                    for y in range(len(pic) + 1):
+                        for x in range(len(j) + 1):
+                            pygame.draw.rect(screen, j, (x, 64 + y, 1, 1), 1)
+                            pygame.display.update()
+    else:
+        s=pygame.mixer.music.load(r"sounds\警告.ogg")
+        pygame.mixer.music.play()
+        screen.blit(unk_fun,(394,247))
+        unk_window=True
+        if left and 865<=mousepos[0]<=905 and 250<=mousepos[1]<=285:
+                initalize()
+
+s=0
+while True:
+    while mode=="Normal":
+        pygame.mixer.music.set_volume(sound/100)
+        isshuttingdown___=0
+        mousepos=pygame.mouse.get_pos()
+        event=pygame.event.poll()
+        keys=pygame.key.get_pressed()
+        #音量调节#
+        soundw=font.render("音量："+str(sound)+"%",True,(0,0,0))
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            exit()
+        left, middle, right = pygame.mouse.get_pressed()
+        if keys[pygame.K_F3]:
+            if sound<100:
+                sound+=1
+        if keys[pygame.K_F2]:
+            if sound>0:
+                sound-=1
+        if keys[pygame.K_F1]:
+            sound=0
+        if keys[pygame.K_F3] or keys[pygame.K_F2] or keys[pygame.K_F1]:
+            time.sleep(0.125)
+            pygame.draw.rect(screen,(255,255,255),(0,20,300,60),0)
+            s=1
+            pygame.draw.rect(screen,(255,255,255),(0,20,300,60),0)
+            screen.blit(soundw,(10,25))
+            pygame.display.update()
+        if s==1 and left:
+            initalize()
+        #*音量调节*
+        while left and pygame.mouse.get_pos()[0] in range(25,71) and pygame.mouse.get_pos()[1] in range(675,723):
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            screen.blit(startmenu,(0,35))
+
+            pygame.display.update()
+            startmenuis=1
+            while not left:
+                while left and not pygame.mouse.get_pos()[0] in range(245,450) and pygame.mouse.get_pos()[1] in range(452,750):
+
+                    initalize()
+
+                    pygame.display.update()
+                    break
+                break
+            break
+        if left and pygame.mouse.get_pos()[0] in range(245,450) and pygame.mouse.get_pos()[1] in range(452,750):
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            while startmenuis==1:
+                screen.blit(dosth,(450,500))
+                pygame.display.update()
+                keys=pygame.key.get_pressed()
+                if keys[pygame.K_o]:
+                    print(pygame.mouse.get_pos())
+                pygame.display.update()
+                isshuttingdown___=1
+                fmousepos=pygame.mouse.get_pos()
+                event=pygame.event.poll()
+                if event.type==pygame.QUIT:
+                    pygame.quit()
+                    exit()
+                left, middle, right = pygame.mouse.get_pressed()
+                if left and isshuttingdown___ and fmousepos[0] in range(449,574) and fmousepos[1] in range(499,548):
+                    pygame.mixer.music.load(r"sounds\shutdown.mp3")  # 加载音乐
+                    pygame.mixer.music.set_volume(0.125)# 设置音量大小0~1的浮点数
+                    pygame.mixer.music.play() # 播放音频
+                    ra2()
+                    exit()
+                if left and isshuttingdown___ and fmousepos[0] in range(450,573) and fmousepos[1] in range(552,600):
+                    pygame.mixer.music.load(r"sounds\shutdown.mp3")  # 加载音乐这段是复制的，所以有一样的注释
+                    pygame.mixer.music.set_volume(0.125)# 设置音量大小0~1的浮点数
+                    pygame.mixer.music.play() # 播放音频
+                    ra2()
+                    screen.fill((0,0,0))
+                    pygame.display.update()
+                    time.sleep(1)
+                    os.startfile(r"1.0.0.0.pyw")
+                    exit()
+                    
+        if mousepos[0] in range(164,212) and mousepos[1] in range(675,721) and left:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            subprocess.Popen(r"MinecraftLauncher\Plain Craft Launcher 2.exe")#打开PCL2，后面的用的都是os.startfile()
+        keys=pygame.key.get_pressed()
+        if keys[pygame.K_SPACE] and keys[pygame.K_c]:
+            subprocess.Popen(r"disks\C.%\MinecraftOS\cmd.py")
+        if mousepos[0] in range(49,149) and mousepos[1] in range(50,149) and left:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            webbrowser.open("https://www.bilibili.com/video/BV15b4y1x7ja/?spm_id_from=333.999.0.0")
+        if left and 50<=mousepos[0]<=150 and 200<=mousepos[1]<=350:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            blueSc("0x0000000")#手动蓝屏
+            ra2()
+            time.sleep(2)
+            os.startfile(r"disks\C.%\MinecraftOS\system32\2.0.0.0.pyw")
+
+        if keys[pygame.K_LCTRL] and keys[pygame.K_c]:
+            os.startfile(r"disks\C.%\MinecraftOS\cmd.py")
+        if keys[pygame.K_SLASH]:
+            running = True
+            a=1
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        # 按下回车键，关闭输入框
+                        running = False
+                        initalize()
+                        pygame.display.update()
+                        check()
+                        log.flush()
+                        input_str=r"/"
+                        a=0
+                        break
+                    elif event.key == pygame.K_BACKSPACE:
+                        input_str = input_str[:-1]
+                    else:
+                        input_str += event.unicode
+
+            pygame.display.update()
+
+            #命令行
+            # 渲染输入框和输入文字
+            pygame.draw.rect(screen, (50,50,50), (0,690,1300,45), 0)
+            text_surface = font.render(input_str, True, (255,255,255))
+            screen.blit(text_surface, (input_box.x + 5, input_box.y - 5))
+
+            # 更新窗口
+            pygame.display.flip()
+        if left and 901<=mousepos[0]<=1251 and 525<=mousepos[1]<=734:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            webbrowser.open("https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click")
+        if startmenuis==1 and left and 245<=mousepos[0]<=450 and 285<=mousepos[1]<=330:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            os.startfile(r"games\billiards.exe")
+        if startmenuis==1 and left and 245<=mousepos[0]<=450 and 330<=mousepos[1]<=375:
+            pygame.mixer.music.load("button_click.mp3")
+            pygame.mixer.music.play()
+            running=True
+        if startmenuis==1 and left and not(0<=mousepos[0]<=450 and 35<=mousepos[1]<=685) and not(25<=mousepos[0]<=70 and 675<=mousepos[1]<=720):
+            initalize()
+        if keys[pygame.K_o]:
+            print(mousepos)
+        if left and 50<=mousepos[0]<=150 and 365<=mousepos[1]<=440:
+            x_pos = 50
+            y_pos = 50
+
+            # 定义屏幕上能显示的文件和文件夹的数量
+            max_icons = 10
+
+            # 获取当前目录
+            current_path = os.getcwd()
+
+            explorer = True
+        while explorer:
+            mousepos=pygame.mouse.get_pos()
+            left,middle,right=pygame.mouse.get_pressed()
+            for event in pygame.event.get():
+                left,middle,right=pygame.mouse.get_pressed()
+                mousepos=pygame.mouse.get_pos()
+                if event.type == pygame.QUIT:
+                    explorer = False
+                elif right:
+                    screen.blit(right_click_img,mousepos)
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+
+                    if event.button == 1:
+
+                        mouse_pos = event.pos
+
+                        # 点击文件夹图标/文字打开文件夹
+
+                        y_pos = 100
+
+                        file_list = os.listdir(current_path)
+
+                        for i in range(start_index, min(start_index + SCROLL_AMOUNT, len(file_list))):
+
+                            item = file_list[i]
+
+                            item_path = os.path.join(current_path, item)
+
+                            if os.path.isdir(item_path):
+
+                                item_rect = pygame.Rect(50, y_pos, ICON_SIZE[0], ICON_SIZE[1])
+
+                                if item_rect.collidepoint(mouse_pos):
+                                    current_path = item_path
+
+                                    start_index = 0
+
+                                    break
+
+                                font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
+
+                                text_surface = font.render(item, True, (0, 0, 0))
+
+                                text_rect = text_surface.get_rect(topleft=(50, y_pos + ICON_SIZE[1]))
+
+                                if text_rect.collidepoint(mouse_pos):
+                                    current_path = item_path
+
+                                    start_index = 0
+
+                                    break
+
+
+                            elif os.path.isfile(item_path):
+
+                                item_rect = pygame.Rect(50, y_pos, ICON_SIZE[0], ICON_SIZE[1])
+
+                                if item_rect.collidepoint(mouse_pos):
+                                    # 使用记事本打开文件
+
+                                    os.startfile(item_path)
+
+                                    break
+
+                                font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
+
+                                text_surface = font.render(item, True, (0, 0, 0))
+
+                                text_rect = text_surface.get_rect(topleft=(50, y_pos + ICON_SIZE[1]))
+
+                                if text_rect.collidepoint(mouse_pos):
+                                    # 使用记事本打开文件
+                                    if item_path[-1:-4:-1] == "pic":
+                                        with open(item_path,"r") as picture:
+                                            code=picture.read()
+                                            exec("pic="+code)
+                                            for i in pic:
+                                                for j in i:
+                                                    for y in range(len(pic)+1):
+                                                        for x in range(len(j)+1):
+                                                            pygame.draw.rect(screen,j,(x,64+y,1,1),1)
+                                                            pygame.display.update()
+
+
+                                    os.system("notepad.exe " + item_path)
+
+
+                                    break
+
+                            y_pos += 60
+
+                        # 点击文件打开器按钮返回上级目录
+
+                        if file_opener_button.collidepoint(mouse_pos):
+                            current_path = os.path.dirname(current_path)
+
+                            start_index = 0
+
+
+                    elif event.button == 4:  # 鼠标滚轮向上滚动
+
+                        start_index = max(start_index - SCROLL_AMOUNT, 0)
+
+
+                    elif event.button == 5:  # 鼠标滚轮向下滚动
+
+                        start_index = min(start_index + SCROLL_AMOUNT, len(os.listdir(current_path)) - 1)
+
+                    # 刷新屏幕
+
+                screen.fill((255, 255, 255))
+
+                # 显示文件夹和文件的图标和名称
+
+                y_pos = 100
+
+                file_list = os.listdir(current_path)
+
+                for i in range(start_index, min(start_index + SCROLL_AMOUNT, len(file_list))):
+
+                    item = file_list[i]
+
+                    item_path = os.path.join(current_path, item)
+
+                    if os.path.isdir(item_path):
+
+                        screen.blit(folder_icon, (50, y_pos))
+
+                    elif os.path.isfile(item_path):
+
+                        item_rect = pygame.Rect(50, y_pos, ICON_SIZE[0], ICON_SIZE[1])
+
+                        if item_rect.collidepoint(mouse_pos):
+                            file_extension = item.split(".")[-1]  # 获取文件扩展名
+
+                            if file_extension == "pic":
+                                  # 处理.pic文件
+                                  with open(item_path, "r") as picture:
+                                      code = picture.read()
+                                      exec("pic=" + code)
+                                      for i in pic:
+                                          for j in i:
+                                              for y in range(len(pic) + 1):
+                                                  for x in range(len(j) + 1):
+                                                      pygame.draw.rect(screen, j, (x, 64 + y, 1, 1), 1)
+                                                      pygame.display.update()
+                            else:
+                                os.system("notepad.exe " + item_path)  # 使用记事本打开其他文件
+
+                            break
+
+                    font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
+
+                    text_surface = font.render(item, True, (0, 0, 0))
+
+                    screen.blit(text_surface, (110, y_pos))
+
+                    y_pos += 60
+
+                # 绘制文件打开器按钮
+
+                pygame.draw.rect(screen, (200, 200, 200), file_opener_button)
+
+                font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)
+
+                text_surface = font.render("返回上级目录", True, (0, 0, 0))
+
+                text_rect = text_surface.get_rect()
+
+                text_rect.topleft = file_opener_button.topleft
+
+                screen.blit(text_surface, text_rect)
+            # 更新显示
+
+            screen.blit(renwulan,(0,660))
+            screen.blit(startbutton,(25,675))
+            screen.blit(pclimg,(165,675))
+            screen.blit(apps,(230,675))
+            screen.blit(soundpng,(295,675))
+            screen.blit(desktopicon,(100,675))
+            soundw = font.render("音量：" + str(sound) + "%", True, (0, 0, 0))
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            left, middle, right = pygame.mouse.get_pressed()
+            if keys[pygame.K_F3]:
+                if sound < 100:
+                    sound += 1
+            if keys[pygame.K_F2]:
+                if sound > 0:
+                    sound -= 1
+            if keys[pygame.K_F1]:
+                sound = 0
+            if keys[pygame.K_F3] or keys[pygame.K_F2] or keys[pygame.K_F1]:
+                time.sleep(0.125)
+                pygame.draw.rect(screen, (255, 255, 255), (0, 20, 300, 60), 0)
+                s = 1
+                pygame.draw.rect(screen, (255, 255, 255), (0, 20, 300, 60), 0)
+                screen.blit(soundw, (10, 25))
+                pygame.display.update()
+            if s == 1 and left:
+                initalize()
+            # *音量调节*
+            while left and pygame.mouse.get_pos()[0] in range(25, 71) and pygame.mouse.get_pos()[1] in range(675, 723):
+                pygame.mixer.music.load("button_click.mp3")
+                pygame.mixer.music.play()
+                screen.blit(startmenu, (0, 35))
+
+                pygame.display.update()
+                startmenuis = 1
+                while not left:
+                    while left and not pygame.mouse.get_pos()[0] in range(245, 450) and pygame.mouse.get_pos()[1] in range(
+                            452, 750):
+                        initalize()
+
+                        pygame.display.update()
+                        break
+                    break
+                break
+            if left and pygame.mouse.get_pos()[0] in range(245, 450) and pygame.mouse.get_pos()[1] in range(452, 750):
+                pygame.mixer.music.load("button_click.mp3")
+                pygame.mixer.music.play()
+                while startmenuis == 1:
+                    screen.blit(dosth, (450, 500))
+                    pygame.display.update()
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_o]:
+                        print(pygame.mouse.get_pos())
+                    pygame.display.update()
+                    isshuttingdown___ = 1
+                    fmousepos = pygame.mouse.get_pos()
+                    event = pygame.event.poll()
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        exit()
+                    left, middle, right = pygame.mouse.get_pressed()
+                    if left and isshuttingdown___ and fmousepos[0] in range(449, 574) and fmousepos[1] in range(499, 548):
+                        pygame.mixer.music.load(r"sounds\shutdown.mp3")  # 加载音乐
+                        pygame.mixer.music.set_volume(0.125)  # 设置音量大小0~1的浮点数
+                        pygame.mixer.music.play()  # 播放音频
+                        ra2()
+                        exit()
+                    if left and isshuttingdown___ and fmousepos[0] in range(450, 573) and fmousepos[1] in range(552, 600):
+                        pygame.mixer.music.load(r"sounds\shutdown.mp3")  # 加载音乐这段是复制的，所以有一样的注释
+                        pygame.mixer.music.set_volume(0.125)  # 设置音量大小0~1的浮点数
+                        pygame.mixer.music.play()  # 播放音频
+                        ra2()
+                        screen.fill((0, 0, 0))
+                        pygame.display.update()
+                        time.sleep(1)
+                        os.startfile(r"1.0.0.0.pyw")
+                        exit()
+
+            if mousepos[0] in range(164, 212) and mousepos[1] in range(675, 721) and left:
+                pygame.mixer.music.load("button_click.mp3")
+                pygame.mixer.music.play()
+                subprocess.Popen(r"MinecraftLauncher\Plain Craft Launcher 2.exe")  # 打开PCL2，后面的用的都是os.startfile()
+            if 100<=mousepos[0]<=150 and left and 675<=mousepos[0]<=725:
+                initalize()
+                explorer=False
+    ##    for module_path in module_paths:
+    ##        module_name = module_path.replace(".py", "").replace("/", ".")
+    ##        module = importlib.import_module(module_name)
+    ##
+    ##        # 调用main函数（如果存在）
+    ##        if hasattr(module, "main") and inspect.isfunction(getattr(module, "main")):
+    ##            module.main()
+    ##    pygame.display.update()
+        if left and 865<=mousepos[0]<=905 and 250<=mousepos[1]<=285 and unk_window:
+            initalize()
+        if left and 360<=mousepos[0]<=410 and 675<=mousepos[1]<=720:
+            screen.fill((255,255,255))
+            while not left:
+                pass
+            files=os.listdir(r"disks\D.%")
+            fl=[]
+            for i in files:
+                if i.endswith(".MP3") or i.endswith(".mp3") or i.endswith(".WAV") or i.endswith(".wav"):
+                    fl.append(i)
+            k = 64  
+            for j in fl:  
+                fn = font.render(j, True, (0,0,0))  
+                screen.blit(fn, (64, k))
+                k += 100  # 增加一个固定的垂直偏移量，例如100像素
+            while True:
+                event=pygame.event.poll()
+                if event==pygame.QUIT:
+                    pygame.quit
+                    exit()
+                mousepos=pygame.mouse.get_pos()
+                left, middle, right = pygame.mouse.get_pressed()
+                if left:
+                    try:
+                        pygame.mixer.music.play(fl[(mousepos[1]+64)//100-1])
+                    except:
+                        pass
+                pygame.display.update()
+
+                
+        if keys[pygame.K_o]:
+            print(mousepos)
+        if left and 425<=mousepos[0]<=475 and 675<=mousepos[1]<=725:
+            mode="Paint"
+            break
+        
+        timehm=timefont.render(time.strftime("%H")+':'+time.strftime("%M"),True,(255,255,255))
+        timemyd=timefont.render(time.strftime("%F"),True,(255,255,255))
+        pygame.display.update()
+        blitprogressbar()
+        screen.blit(timehm,(510,674))
+        screen.blit(timemyd,(510,698))
+        
+    while mode=="Paint":
+        event=pygame.event.poll()
+        left,middle,right=pygame.mouse.get_pressed()
+        mousepos=pygame.mouse.get_pos()
+        keys=pygame.key.get_pressed()
+        if event==pygame.QUIT:
+            pygame.quit()
+            exit()
+        if left:
+            pygame.draw.circle(screen,(255,0,0),mousepos,3)
+            pygame.display.update()
+        if right:
+            initalize()
+            pygame.display.update()
+        if keys[pygame.K_LALT]:
+            mode="Normal"
+            initalize()
+            break
+
+    </code>
+  </div>
+</body>

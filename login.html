@@ -1,28 +1,29 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-    <title>登录</title>  
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>  
-<body>  
-    <h2>登录</h2>  
-    <form id="loginForm">  
-        <label for="uname"><b>用户名</b></label>  
-        <input type="text" placeholder="用户名" name="uname" id="uname" required>  
-        <br>  
-        <label for="psw"><b>密码</b></label>  
-        <input type="password" placeholder="密码" name="psw" id="psw" required>  
-        <button type="button" onclick="login()">Login</button>  
-    </form>  
-  
-    <script>  
-        function login() {  
-            var uname = document.getElementById('uname').value;  
-            var psw = document.getElementById('psw').value;  
-            // 这里可以发送请求到服务器进行验证，例如使用fetch API或axios。  
-            // 如果验证成功，则可以重定向到其他页面或显示消息。  
-            // 如果验证失败，则可以显示错误消息。  
-        }  
-    </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<div class="control">
+    <div class="item">
+        <div class="active">注册</div>
+    </div>
+    <div class="content">
+        <div style="display: block;">
+            <form action="/user/register" method="post">
+            <p>用户名</p>
+            <input type="text" placeholder="请输入用户名" name="username" />
+            <p>密码</p>
+            <input type="password" placeholder="请输入密码" name ="password"/>
+            <br/>
+            <input type="submit" value="注册"/>
+            </form>
+               <p>已注册，<a href="/user/login" target="top">去登录</a></p>
+
+        </div>
+    </div>
+</div>
+</body>
 </html>

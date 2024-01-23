@@ -2,7 +2,7 @@
 <?php
 $username = 'root';
 $password = 'root';
-$ip = '127.0.0.1';
+$ip = 'smilingcreeper.github.io';
 $database = 'database';
 $conn = new mysqli($ip,$username,$password,$database);
 $logname = $_GET['name'];

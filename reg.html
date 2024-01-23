@@ -1,32 +1,29 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-    <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>  
-<body>  
-    <h2>注册</h2>  
-    <form id="registerForm">  
-        <label for="usr">用户名</label>  
-        <input type="text" placeholder="填写用户名" name="usr" id="usr" required>  
-        <br>  
-        <label for="psw1">密码</label>  
-        <input type="password" placeholder="填写密码" name="psw1" id="psw1" required>  
-        <br>  
-        <label for="psw2">再次确认密码</label>  
-        <input type="password" placeholder="再次确认密码" name="psw2" id="psw2" required>  
-        <button type="button" onclick="register()">Register</button>  
-    </form>  
-  
-    <script>  
-        function register() {  
-            var usr = document.getElementById('usr').value;  
-            var psw1 = document.getElementById('psw1').value;  
-            var psw2 = document.getElementById('psw2').value;  
-            // 这里可以发送请求到服务器进行注册，例如使用fetch API或axios。  
-            // 如果注册成功，则可以重定向到其他页面或显示消息。  
-            // 如果注册失败，则可以显示错误消息。  
-        }  
-    </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<div class="control">
+    <div class="item">
+        <div class="active">注册</div>
+    </div>
+    <div class="content">
+        <div style="display: block;">
+            <form action="/user/register" method="post">
+            <p>用户名</p>
+            <input type="text" placeholder="请输入用户名" name="username" />
+            <p>密码</p>
+            <input type="password" placeholder="请输入密码" name ="password"/>
+            <br/>
+            <input type="submit" value="注册"/>
+            </form>
+               <p>已注册，<a href="/user/login" target="top">去登录</a></p>
+
+        </div>
+    </div>
+</div>
+</body>
 </html>

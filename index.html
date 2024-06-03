@@ -12,6 +12,17 @@
 }
 </style>
 <h1>欢迎来到爱笑的苦力怕.py-Github官网！</h1>
+<?php
+$db_host="192.168.0.9";
+$db_name="SmilingCreeper";
+$db_pwd="20130203Edward:;
+$link=mysqli_connect($db_host,$db_name,$db_pwd);
+if($link){
+  echo "success";
+}else{
+  echo "fail";
+}
+>
 <a href="https://space.bilibili.com/3493082144181043?spm_id_from=333.1007.0.0">跳转至Bilibili主页</a>
 <div id="loginDiv">
     <button onclick="window.location.href='login.html'">登录</button>
